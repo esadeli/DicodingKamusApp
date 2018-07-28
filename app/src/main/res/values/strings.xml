@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DicodingKamusApp</string>
+
+    <string name="english_to_indonesia">English to Indonesia</string>
+    <string name="indonesia_to_english">Indonesia to English</string>
+
+    <string name="kata">Kata</string>
+    <string name="arti_kata_detail">Arti Kata</string>
+
+    <string name="app_first_run">first_run</string>
+    <string name="search">Search</string>
+    <string name="cari">Cari</string>
+</resources>
