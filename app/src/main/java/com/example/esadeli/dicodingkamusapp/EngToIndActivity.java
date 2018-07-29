@@ -45,7 +45,7 @@ public class EngToIndActivity extends AppCompatActivity {
         recyclerView.setAdapter(kamusAdapter);
 
         // Open the SQLiteOpenHelper
-        kamusHelper.open();
+        kamusHelper.openQuery();
 
         //Create an instance of ArrayList
         ArrayList<KamusSederhana> kamusSederhanas = kamusHelper.getAllEngData();
@@ -62,7 +62,7 @@ public class EngToIndActivity extends AppCompatActivity {
         super.onResume();
 
         // Open the SQLiteOpenHelper
-        kamusHelper.open();
+        kamusHelper.openQuery();
 
         //Create an instance of ArrayList
         ArrayList<KamusSederhana> kamusSederhanas = kamusHelper.getAllEngData();
@@ -101,7 +101,7 @@ public class EngToIndActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
 
                 // Open the SQLiteOpenHelper
-                kamusHelper.open();
+                kamusHelper.openQuery();
 
                 //Create an instance of ArrayList
                 ArrayList<KamusSederhana> kamusQuery = kamusHelper.getDataEngByKata(newText);

@@ -12,9 +12,11 @@ import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
 import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.ENG_TABLE_NAME;
-import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.EngToIndColumns.ARTI_KATA;
-import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.EngToIndColumns.KATA;
+import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.EngToIndColumns.ARTI_KATA_INGGRIS;
+import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.EngToIndColumns.KATA_INGGRIS;
 import static com.example.esadeli.dicodingkamusapp.Data.IndoToEngContract.IND_TABLE_NAME;
+import static com.example.esadeli.dicodingkamusapp.Data.IndoToEngContract.IndoToEngColumns.ARTI_KATA_INDONESIA;
+import static com.example.esadeli.dicodingkamusapp.Data.IndoToEngContract.IndoToEngColumns.KATA_INDONESIA;
 
 /**
  * Created by esadeli on 29/07/18.
@@ -39,6 +41,13 @@ public class KamusHelper {
         return this;
     }
 
+    public KamusHelper openQuery() throws SQLException {
+        dataBaseHelper = new DatabaseHelper(context);
+        database = dataBaseHelper.getReadableDatabase();
+        return this;
+    }
+
+
     public void close() {
         dataBaseHelper.close();
     }
@@ -48,7 +57,7 @@ public class KamusHelper {
         Cursor cursor = database.query(
                 ENG_TABLE_NAME,
                 null,
-                KATA + " LIKE ?", new String[]{kata},
+                KATA_INGGRIS + " LIKE ?", new String[]{kata},
                 null,
                 null,
                 _ID + " ASC",
@@ -60,8 +69,8 @@ public class KamusHelper {
             do {
                 kamusInggris = new KamusSederhana();
                 kamusInggris.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
-                kamusInggris.setKata(cursor.getString(cursor.getColumnIndexOrThrow(KATA)));
-                kamusInggris.setArti(cursor.getString(cursor.getColumnIndexOrThrow(ARTI_KATA)));
+                kamusInggris.setKata(cursor.getString(cursor.getColumnIndexOrThrow(KATA_INGGRIS)));
+                kamusInggris.setArti(cursor.getString(cursor.getColumnIndexOrThrow(ARTI_KATA_INGGRIS)));
 
                 arrayList.add(kamusInggris);
                 cursor.moveToNext();
@@ -77,7 +86,7 @@ public class KamusHelper {
         Cursor cursor = database.query(
                 IND_TABLE_NAME,
                 null,
-                IndoToEngContract.IndoToEngColumns.KATA + " LIKE ?", new String[]{kata},
+                KATA_INDONESIA + " LIKE ?", new String[]{kata},
                 null,
                 null,
                 _ID + " ASC",
@@ -90,9 +99,9 @@ public class KamusHelper {
                 kamusIndonesia = new KamusSederhana();
                 kamusIndonesia.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
                 kamusIndonesia.setKata(cursor.getString(
-                        cursor.getColumnIndexOrThrow(IndoToEngContract.IndoToEngColumns.KATA)));
+                        cursor.getColumnIndexOrThrow(KATA_INDONESIA)));
                 kamusIndonesia.setArti(cursor.getString(
-                        cursor.getColumnIndexOrThrow(IndoToEngContract.IndoToEngColumns.ARTI_KATA)));
+                        cursor.getColumnIndexOrThrow(ARTI_KATA_INDONESIA)));
 
                 arrayList.add(kamusIndonesia);
                 cursor.moveToNext();
@@ -118,8 +127,8 @@ public class KamusHelper {
             do {
                 kamusEnglish = new KamusSederhana();
                 kamusEnglish.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
-                kamusEnglish.setKata(cursor.getString(cursor.getColumnIndexOrThrow(KATA)));
-                kamusEnglish.setArti(cursor.getString(cursor.getColumnIndexOrThrow(ARTI_KATA)));
+                kamusEnglish.setKata(cursor.getString(cursor.getColumnIndexOrThrow(KATA_INGGRIS)));
+                kamusEnglish.setArti(cursor.getString(cursor.getColumnIndexOrThrow(ARTI_KATA_INGGRIS)));
 
 
                 arrayList.add(kamusEnglish);
@@ -148,11 +157,9 @@ public class KamusHelper {
                 kamusIndonesian = new KamusSederhana();
                 kamusIndonesian.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
                 kamusIndonesian.setKata(cursor.getString(
-                        cursor.getColumnIndexOrThrow(
-                                IndoToEngContract.IndoToEngColumns.KATA)));
+                        cursor.getColumnIndexOrThrow(KATA_INDONESIA)));
                 kamusIndonesian.setArti(cursor.getString(
-                        cursor.getColumnIndexOrThrow(
-                                IndoToEngContract.IndoToEngColumns.ARTI_KATA)));
+                        cursor.getColumnIndexOrThrow(ARTI_KATA_INDONESIA)));
 
 
                 arrayList.add(kamusIndonesian);
@@ -178,8 +185,8 @@ public class KamusHelper {
     }
 
     public void insertEngTransaction(KamusSederhana kamusSederhana) {
-        String sql = "INSERT INTO " + ENG_TABLE_NAME + " (" + KATA + ", " + ARTI_KATA
-                + ") VALUES (?, ?)";
+        String sql = "INSERT INTO " + ENG_TABLE_NAME + " (" + KATA_INGGRIS + ", " +
+                ARTI_KATA_INGGRIS + ") VALUES (?, ?)";
         SQLiteStatement stmt = database.compileStatement(sql);
 
         stmt.bindString(1, kamusSederhana.getKata());
@@ -191,9 +198,8 @@ public class KamusHelper {
     }
 
     public void insertIndTransaction(KamusSederhana kamusSederhana) {
-        String sql = "INSERT INTO " + IND_TABLE_NAME +
-                " (" + IndoToEngContract.IndoToEngColumns.KATA + ", " +
-                IndoToEngContract.IndoToEngColumns.ARTI_KATA + ") VALUES (?, ?)";
+        String sql = "INSERT INTO " + IND_TABLE_NAME + " (" + KATA_INDONESIA + ", " +
+                ARTI_KATA_INDONESIA + ") VALUES (?, ?)";
         SQLiteStatement stmt = database.compileStatement(sql);
 
         stmt.bindString(1, kamusSederhana.getKata());

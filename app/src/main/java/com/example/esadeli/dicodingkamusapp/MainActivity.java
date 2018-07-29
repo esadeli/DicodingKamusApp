@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String TAG = KamusAsyncTask.class.getSimpleName();
 
             boolean checkFirstRun = firstRunPreferences.getFirstRun();
 
@@ -115,13 +114,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             do {
                 line = reader.readLine();
-                String[] splitstr = line.split("\t");
+                if(line!=null){
+                    String[] splitstr = line.split("\t");
 
-                KamusSederhana kamusInggris;
+                    KamusSederhana kamusInggris;
 
-                kamusInggris = new KamusSederhana(splitstr[0], splitstr[1]);
-                kamusSederhanas.add(kamusInggris);
-
+                    kamusInggris = new KamusSederhana(splitstr[0], splitstr[1]);
+                    kamusSederhanas.add(kamusInggris);
+                }
             } while (line != null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,13 +141,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             do {
                 line = reader.readLine();
-                String[] splitstr = line.split("\t");
 
-                KamusSederhana kamusIndonesia;
+                if(line!=null){
+                    String[] splitstr = line.split("\t");
 
-                kamusIndonesia = new KamusSederhana(splitstr[0], splitstr[1]);
-                kamusSederhanas.add(kamusIndonesia);
+                    KamusSederhana kamusIndonesia;
 
+                    kamusIndonesia = new KamusSederhana(splitstr[0], splitstr[1]);
+                    kamusSederhanas.add(kamusIndonesia);
+                }
             } while (line != null);
         } catch (Exception e) {
             e.printStackTrace();

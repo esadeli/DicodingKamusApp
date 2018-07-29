@@ -6,9 +6,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.provider.BaseColumns._ID;
 import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.ENG_TABLE_NAME;
-import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.EngToIndColumns.ARTI_KATA;
-import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.EngToIndColumns.KATA;
+import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.EngToIndColumns.ARTI_KATA_INGGRIS;
+import static com.example.esadeli.dicodingkamusapp.Data.EngToIndoContract.EngToIndColumns.KATA_INGGRIS;
 import static com.example.esadeli.dicodingkamusapp.Data.IndoToEngContract.IND_TABLE_NAME;
+import static com.example.esadeli.dicodingkamusapp.Data.IndoToEngContract.IndoToEngColumns.ARTI_KATA_INDONESIA;
+import static com.example.esadeli.dicodingkamusapp.Data.IndoToEngContract.IndoToEngColumns.KATA_INDONESIA;
 
 /**
  * Created by esadeli on 29/07/18.
@@ -24,13 +26,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static String CREATE_TABLE_ENG_TO_IND = "create table " + ENG_TABLE_NAME +
             " (" + _ID + " integer primary key autoincrement, " +
-            KATA + " text not null, " +
-            ARTI_KATA + " text not null);";
+            KATA_INGGRIS + " text not null, " +
+            ARTI_KATA_INGGRIS + " text not null);";
 
     private static String CREATE_TABLE_IND_TO_ENG = "create table " + IND_TABLE_NAME +
             " (" + _ID + " integer primary key autoincrement, " +
-            KATA + " text not null, " +
-            ARTI_KATA + " text not null);";
+            KATA_INDONESIA + " text not null, " +
+            ARTI_KATA_INDONESIA + " text not null);";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

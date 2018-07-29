@@ -15,9 +15,9 @@ public class EngToIndoContract {
     static final class EngToIndColumns implements BaseColumns {
 
         // Kata
-        static String KATA = "kata";
+        static String KATA_INGGRIS = "kata";
         // Arti kata
-        static String ARTI_KATA = "artikata";
+        static String ARTI_KATA_INGGRIS = "artikata";
 
     }
 }

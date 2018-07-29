@@ -17,8 +17,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity" />
-        <activity android:name=".EngToIndActivity" />
-        <activity android:name=".IndToEngActivity"></activity>
+        <activity android:name=".EngToIndActivity"
+            android:label="@string/english_to_indonesia"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".IndToEngActivity"
+            android:label="@string/indonesia_to_english"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
     </application>
 
 </manifest>
